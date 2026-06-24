@@ -1,0 +1,30 @@
+# OS noise
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+Thumbs.db
+
+# Editor noise
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtualenvs
+venv/
+.venv/
+env/
+
+# Local env files with secrets
+.env
+.env.local
+*.env.local
+
+# Quarantine files (macOS)
+*.dat

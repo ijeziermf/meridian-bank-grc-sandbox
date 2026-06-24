@@ -1,0 +1,543 @@
+{
+  "persona": {
+    "name": "Meridian Bank",
+    "legal_name": "Meridian Bank, National Association",
+    "industry": "Commercial Banking",
+    "sub_sector": "Mid-size regional / community bank",
+    "size": {
+      "employees": 3200,
+      "fte_security": 12,
+      "fte_engineering": 180,
+      "fte_compliance": 28,
+      "customers": "2.4M retail and commercial",
+      "total_assets_usd_billions": 50.2,
+      "branches": 240,
+      "states_operating": ["NC", "SC", "VA", "TN"]
+    },
+    "founded": 1962,
+    "ownership": "Public (NYSE: MRDN), holding company Meridian Bancshares, Inc.",
+    "hosting": "Hybrid: FIS-hosted core banking (Profile platform), on-prem data center Charlotte NC, Azure AD for identity, AWS for digital channels (online/mobile banking)",
+    "compliance_state": {
+      "ffiec_cat": "Inherent risk profile = High, maturity profile = Intermittent across all five domains, full re-assessment annually with quarterly refresh",
+      "ffiec_it_examination_handbook": "Last IT exam 2025-Q3, Matters Requiring Attention (MRA) closed 2026-Q1",
+      "nydfs_23_nyccr_500": "Exempt (no NY operations), tracked as adjacent framework",
+      "sox_itgc": "Active since IPO 2018, 2025 audit clean, 2026 cycle in progress",
+      "glba_safeguards_rule": "Program current, 2026 revision incorporated, continuous risk assessment",
+      "pci_dss_4_0": "ROC issued 2025-Q4 (Fiserv-scope card services), AOC current through 2026-Q4",
+      "soc1_type2": "Issued annually for core banking services supporting correspondent bank customers",
+      "soc2_type2": "Not currently pursued (banking regulators prefer FFIEC over SOC 2)"
+    },
+    "geographic_scope": {
+      "headquarters": "Charlotte, NC",
+      "branches": "240 across NC, SC, VA, TN",
+      "data_residency": "United States only, FIS-hosted core in Dallas TX and Birmingham AL",
+      "remote_workers": "18% of workforce (call center, IT, corporate functions)"
+    }
+  },
+  "perimeters": [
+    {
+      "name": "FIS Profile Core Banking System",
+      "description": "Hosted core banking platform (FIS Profile) running deposit accounts, loans, general ledger. Operated as a managed service under FIS BAA-equivalent (vendor contract with security exhibits). Serves all 240 branches and digital channels.",
+      "in_scope": [
+        "Retail deposit accounts (DDA, savings, MMA, CDs)",
+        "Commercial loans and lending workflows",
+        "General ledger and financial reporting",
+        "ATM driving platform (Diebold Nixdorf)",
+        "Customer master and CIF (Customer Information File)",
+        "Branch teller and back-office workstations"
+      ],
+      "out_of_scope": [
+        "Wealth management trust platform (separate perimeter, Jack Henry)",
+        "Card services cardholder data environment (separate PCI perimeter, Fiserv)",
+        "Wire transfer processing (separate perimeter, ACI)",
+        "Corporate IT and HR systems"
+      ]
+    },
+    {
+      "name": "Wealth Management and Trust Operations",
+      "description": "Jack Henry SilverLake platform for trust operations, wealth management customer records, fiduciary accounts. Lower transaction volume than core but higher per-account value.",
+      "in_scope": [
+        "Trust account administration",
+        "Wealth management client records",
+        "Investment custody (held via correspondent Pershing)",
+        "Fiduciary account workflows"
+      ],
+      "out_of_scope": [
+        "Retail banking core (separate perimeter)",
+        "Brokerage execution (handled by Pershing)"
+      ]
+    },
+    {
+      "name": "Wire Transfer and Correspondent Banking",
+      "description": "ACI Worldwide Posttrade/Wire processing, FedLine Advantage for Federal Reserve access, correspondent bank interfaces (Pershing clearing). Highest-value per-transaction, primary SOC 1 audit scope.",
+      "in_scope": [
+        "Wire origination and authentication",
+        "FedLine Advantage access (Federal Reserve Fedwire and FedACH)",
+        "Correspondent bank interfaces (Pershing, other banks)",
+        "OFAC screening pre-transmission",
+        "AML transaction monitoring wires"
+      ],
+      "out_of_scope": [
+        "ACH originated through retail channels (handled by FIS Profile)",
+        "Card network settlement"
+      ]
+    },
+    {
+      "name": "Digital Banking Channels",
+      "description": "Customer-facing web and mobile banking, Zelle P2P, online bill pay, ATM jackpotting-resistant fleet. Built and operated in-house on AWS with Azure AD B2C for consumer identity.",
+      "in_scope": [
+        "Web banking application",
+        "Mobile banking (iOS, Android)",
+        "Zelle P2P integration (Early Warning)",
+        "Online bill pay (Fiserv-sponsored)",
+        "ATM driving platform",
+        "Customer authentication and MFA"
+      ],
+      "out_of_scope": [
+        "Internal corporate systems",
+        "Branch teller platform"
+      ]
+    }
+  ],
+  "frameworks_to_load": [
+    {
+      "name": "FFIEC Cybersecurity Assessment Tool (CAT)",
+      "urn": "urn:intuitem:risk:library:ffiec-cat",
+      "purpose": "Primary federal cybersecurity framework, baseline against which OCC measures inherent risk and maturity"
+    },
+    {
+      "name": "FFIEC IT Examination Handbook",
+      "urn": "urn:intuitem:risk:library:ffiec-it-handbook",
+      "purpose": "Reference handbook covering IT audit, business continuity, development/acquisition, infosec, management, operations, outsourcing, retail payments, wholesale payments"
+    },
+    {
+      "name": "NYDFS 23 NYCRR Part 500 (Cybersecurity Requirements for Financial Services)",
+      "urn": "urn:intuitem:risk:library:nydfs-23-nyccr-500",
+      "purpose": "Adjacent compliance: tracked even though Meridian has no NY operations, because correspondent banking relationships may pull Meridian into NY regulatory scope"
+    },
+    {
+      "name": "SOX ITGC (Sarbanes-Oxley IT General Controls)",
+      "urn": "urn:intuitem:risk:library:sox-itgc",
+      "purpose": "Public-company reporting controls, audited annually for material financial systems (FIS Profile, wire processing, card services)"
+    },
+    {
+      "name": "GLBA Safeguards Rule (16 CFR Part 314)",
+      "urn": "urn:intuitem:risk:library:glba-safeguards-rule",
+      "purpose": "Customer information protection standard, mandatory information security program, board-approved annually"
+    },
+    {
+      "name": "FFIEC BCP/DR / Business Continuity Management Handbook",
+      "urn": "urn:intuitem:risk:library:ffiec-bcp-dr",
+      "purpose": "Recovery time objectives and resilience testing standards for core banking, wires, card services"
+    },
+    {
+      "name": "PCI DSS 4.0",
+      "urn": "urn:intuitem:risk:library:pci-dss-4",
+      "purpose": "Cardholder data environment (Fiserv card services), annual ROC, quarterly ASV scans, penetration testing"
+    },
+    {
+      "name": "NIST CSF 2.0 (cross-reference)",
+      "urn": "urn:intuitem:risk:library:nist-csf-2.0",
+      "purpose": "Common taxonomy mapping against FFIEC CAT, supports vendor diligence questionnaires and OCC examiner dialogue"
+    }
+  ],
+  "audit_scope": {
+    "primary": "FFIEC CAT (OCC annual exam) + SOX ITGC (PCAOB auditor annual)",
+    "secondary": "GLBA Safeguards Rule + PCI DSS 4.0 ROC + NYDFS 23 NYCRR 500 adjacent"
+  },
+  "risk_register_seed": [
+    {
+      "id": "MB-R-01",
+      "title": "ATM jackpotting at regional branch fleet",
+      "inherent": 16,
+      "owner": "Head of Physical Security / CISO"
+    },
+    {
+      "id": "MB-R-02",
+      "title": "Wire fraud via business email compromise (BEC) targeting commercial customers",
+      "inherent": 25,
+      "owner": "BSA Officer / CISO"
+    },
+    {
+      "id": "MB-R-03",
+      "title": "ACH fraud (origination debiting or returns manipulation)",
+      "inherent": 20,
+      "owner": "BSA Officer"
+    },
+    {
+      "id": "MB-R-04",
+      "title": "Synthetic identity lending losses (auto loan and unsecured consumer)",
+      "inherent": 16,
+      "owner": "Chief Credit Officer"
+    },
+    {
+      "id": "MB-R-05",
+      "title": "Correspondent banking AML/KYC gap (Pershing or downstream foreign bank)",
+      "inherent": 20,
+      "owner": "BSA Officer"
+    },
+    {
+      "id": "MB-R-06",
+      "title": "Core banking vendor concentration on FIS Profile (single point of failure)",
+      "inherent": 16,
+      "owner": "CIO"
+    },
+    {
+      "id": "MB-R-07",
+      "title": "Ransomware on FIS-hosted core banking host (managed environment, shared responsibility)",
+      "inherent": 20,
+      "owner": "CISO"
+    },
+    {
+      "id": "MB-R-08",
+      "title": "Third-party core banking breach at FIS exposing customer NPI",
+      "inherent": 25,
+      "owner": "CISO"
+    },
+    {
+      "id": "MB-R-09",
+      "title": "Destructive malware / wiper attack on internal branch network",
+      "inherent": 16,
+      "owner": "CISO"
+    },
+    {
+      "id": "MB-R-10",
+      "title": "Insider trading via material non-public information (MNPI) accessed through trust operations",
+      "inherent": 12,
+      "owner": "CCO / Head of Wealth"
+    },
+    {
+      "id": "MB-R-11",
+      "title": "Critical vendor SLA breach during quarter-end close (FIS Profile or ACI)",
+      "inherent": 12,
+      "owner": "CIO"
+    },
+    {
+      "id": "MB-R-12",
+      "title": "Disaster recovery failure - inability to fail over from Charlotte primary data center during regional event",
+      "inherent": 16,
+      "owner": "Head of Business Continuity"
+    }
+  ],
+  "policy_set": [
+    "Information Security Program (GLBA-aligned)",
+    "GLBA Safeguards Policy (16 CFR Part 314)",
+    "Third-Party Risk Management Policy",
+    "Wire Transfer Authentication and Dual Control Policy",
+    "Business Continuity and Disaster Recovery Plan (FFIEC BCP)",
+    "Incident Response Policy (with NYDFS 72-hour notification clock and GLBA multi-state breach notification)",
+    "Vendor Management and Due Diligence Policy",
+    "Customer Identification Program (CIP) Policy",
+    "Anti-Money Laundering / Bank Secrecy Act (AML/BSA) Policy",
+    "OFAC Compliance and Sanctions Screening Policy",
+    "Records Retention Policy (12 categories, FFIEC and SOX retention schedules)",
+    "Cybersecurity Awareness and Training Policy (mandatory annual + role-based)"
+  ],
+  "tprm": {
+    "vendor_count_target": 30,
+    "vendor_tiers": {
+      "critical": 9,
+      "critical_no_baa_equivalent": 1,
+      "high": 11,
+      "medium": 7,
+      "low": 2
+    },
+    "sample_vendors": [
+      {
+        "name": "FIS (Fidelity National Information Services)",
+        "tier": "critical",
+        "baa_signed": true,
+        "service": "Core banking platform (Profile), deposit and loan servicing for 240 branches and digital channels",
+        "phi_access": false,
+        "customer_npi_access": true,
+        "regulatory_dependency": "OCC-supervised service provider, FFIEC IT Examination Handbook Outsourcing Booklet"
+      },
+      {
+        "name": "Jack Henry & Associates",
+        "tier": "critical",
+        "baa_signed": true,
+        "service": "Trust operations platform (SilverLake), wealth management customer records and fiduciary accounts",
+        "phi_access": false,
+        "customer_npi_access": true,
+        "regulatory_dependency": "FFIEC-supervised service provider"
+      },
+      {
+        "name": "Fiserv",
+        "tier": "critical",
+        "baa_signed": true,
+        "service": "Card services issuer processor, debit and credit card transactions, ATM driving for Fiserv-network ATMs",
+        "phi_access": false,
+        "customer_npi_access": true,
+        "regulatory_dependency": "PCI DSS 4.0 scope, annual ROC"
+      },
+      {
+        "name": "ACI Worldwide",
+        "tier": "critical",
+        "baa_signed": true,
+        "service": "Wire transfer processing (Posttrade), AML transaction monitoring wires",
+        "phi_access": false,
+        "customer_npi_access": true,
+        "regulatory_dependency": "SOX ITGC in-scope, wire room controls"
+      },
+      {
+        "name": "Federal Reserve FedLine Advantage",
+        "tier": "critical_no_baa_equivalent",
+        "baa_signed": false,
+        "service": "Fedwire and FedACH access, primary federal settlement",
+        "phi_access": false,
+        "customer_npi_access": true,
+        "regulatory_dependency": "Federal Reserve-supervised, no BAA-equivalent, governed by Operating Circular 5"
+      },
+      {
+        "name": "Amazon Web Services",
+        "tier": "high",
+        "baa_signed": true,
+        "service": "Hosting for digital banking (online/mobile), Zelle integration, fraud analytics workloads",
+        "phi_access": false,
+        "customer_npi_access": true,
+        "regulatory_dependency": "FFIEC Outsourced Cloud Computing statement guidance"
+      },
+      {
+        "name": "Microsoft Azure Active Directory",
+        "tier": "high",
+        "baa_signed": true,
+        "service": "Employee and customer identity provider for digital channels",
+        "phi_access": false,
+        "customer_npi_access": true,
+        "regulatory_dependency": "OCC authentication guidance"
+      },
+      {
+        "name": "Datadog",
+        "tier": "high",
+        "baa_signed": true,
+        "service": "APM, log aggregation, audit log forwarding target, SIEM-adjacent",
+        "phi_access": false,
+        "customer_npi_access": false,
+        "regulatory_dependency": "FFIEC audit logging expectations"
+      },
+      {
+        "name": "Vanta",
+        "tier": "medium",
+        "baa_signed": true,
+        "service": "Compliance evidence collection, FFIEC CAT and SOX evidence automation",
+        "phi_access": false,
+        "customer_npi_access": false,
+        "regulatory_dependency": "Internal efficiency tool, no direct customer data"
+      },
+      {
+        "name": "Pershing (BNY Mellon subsidiary)",
+        "tier": "critical",
+        "baa_signed": true,
+        "service": "Correspondent clearing, custody, trade execution for wealth management customers",
+        "phi_access": false,
+        "customer_npi_access": true,
+        "regulatory_dependency": "SEC/FINRA-supervised introducing broker-dealer, correspondent bank regulatory expectations"
+      }
+    ]
+  },
+  "ropa": {
+    "purpose": "Records of Processing Activities under GLBA Safeguards Rule, state data breach notification laws (NC, SC, VA, TN), CFPB Regulation P, and FFIEC audit requirements",
+    "count_target": 15,
+    "categories": [
+      {
+        "name": "Customer onboarding and account management",
+        "processing_activities": [
+          "Customer onboarding and due diligence (CIP, KYC, beneficial ownership)",
+          "Deposit account management (DDA, savings, CDs, MMA, overdraft decisions)",
+          "Loan origination and servicing (consumer and commercial)",
+          "Credit reporting (furnishing to bureaus, FCRA-compliant disputes)"
+        ]
+      },
+      {
+        "name": "Payments and transfers",
+        "processing_activities": [
+          "Wire transfers (Fedwire, correspondent wires, outbound international)",
+          "ACH origination and returns (FedACH, same-day ACH)",
+          "Zelle and person-to-person payments (Early Warning network)",
+          "Online bill pay (Fiserv-sponsored, payee management)",
+          "ATM transactions (own fleet and surcharge-free network)"
+        ]
+      },
+      {
+        "name": "Card services",
+        "processing_activities": [
+          "Card transactions (debit, credit, ATM, dispute workflow)"
+        ]
+      },
+      {
+        "name": "BSA / AML / Sanctions",
+        "processing_activities": [
+          "AML transaction monitoring (BSA Officer, suspicious activity report workflow)",
+          "OFAC sanctions screening (real-time and batch)"
+        ]
+      },
+      {
+        "name": "Digital channels",
+        "processing_activities": [
+          "Mobile and online banking (session, MFA, device fingerprint)"
+        ]
+      },
+      {
+        "name": "Marketing and analytics (no NPI)",
+        "processing_activities": [
+          "Marketing (non-NPI customer segments, opt-outs honored)"
+        ]
+      },
+      {
+        "name": "Internal access and HR",
+        "processing_activities": [
+          "Employee access to customer NPI (need-to-know, monitored)"
+        ]
+      }
+    ]
+  },
+  "bia_target": {
+    "tier_1_critical": [
+      "FIS Profile core banking (Tier 1, RTO 4 hours)",
+      "Wire transfer processing via ACI (Tier 1, RTO 2 hours, RPO zero for in-flight wires)",
+      "FedLine Advantage access (Tier 1, RTO 1 hour, regulator-mandated)"
+    ],
+    "tier_2_essential": [
+      "Jack Henry trust operations (Tier 2, RTO 24 hours)",
+      "Fiserv card services authorization (Tier 2, RTO 4 hours)",
+      "Digital banking channels (Tier 2, RTO 8 hours)",
+      "ATM driving platform (Tier 2, RTO 8 hours)"
+    ],
+    "tier_3_deferrable": [
+      "Marketing analytics platform",
+      "Internal HR and corporate IT",
+      "Wealth management reporting (non-real-time)",
+      "Branch video surveillance archival"
+    ]
+  },
+  "validation_flows": [
+    {
+      "name": "Wire fraud incident response (BEC on commercial customer)",
+      "approvers": [
+        "BSA Officer",
+        "CISO",
+        "Fraud Operations Director",
+        "General Counsel",
+        "CIO"
+      ],
+      "sla_hours": 4
+    },
+    {
+      "name": "OFAC match resolution (potential sanctions hit on wire or account opening)",
+      "approvers": [
+        "BSA Officer",
+        "OFAC Compliance Officer",
+        "Legal",
+        "Head of Operations"
+      ],
+      "sla_hours": 24
+    },
+    {
+      "name": "Third-party vendor breach notification (FIS or Fiserv incident)",
+      "approvers": [
+        "CISO",
+        "Vendor Management Officer",
+        "General Counsel",
+        "BSA Officer",
+        "CIO"
+      ],
+      "sla_hours": 72
+    },
+    {
+      "name": "Catastrophic BCP activation (Charlotte data center loss, regional event)",
+      "approvers": [
+        "Head of Business Continuity",
+        "CIO",
+        "CEO",
+        "COO",
+        "CISO",
+        "External OCC notification"
+      ],
+      "sla_hours": 2
+    },
+    {
+      "name": "GLBA Safeguards exception (control gap with material customer NPI exposure)",
+      "approvers": [
+        "CISO",
+        "GLBA Compliance Officer",
+        "CRO",
+        "Board Risk Committee",
+        "Internal Audit"
+      ],
+      "sla_hours": 48
+    }
+  ],
+  "audit_log_forwarding": {
+    "target_siem": "Datadog (US region), with secondary archival to Splunk Cloud for FFIEC IT Examination Handbook retention",
+    "events_per_day_target": "~8M core banking + 2M digital channels + 500K wires",
+    "retention_days": 2555,
+    "retention_rationale": "FFIEC IT Examination Handbook and SOX retention (7 years), with hot storage 1 year and cold storage 6 years",
+    "format": "NDJSON (per CISO Assistant `structured-logging` doc)",
+    "events": [
+      "auth.login",
+      "auth.failed",
+      "wire.origination",
+      "wire.dual_control_override",
+      "ach.origination",
+      "ach.batch_release",
+      "customer.cif_change",
+      "customer.ofac_hit",
+      "customer.sar_filed",
+      "atm.transaction",
+      "card.transaction",
+      "admin.privileged_access",
+      "policy.change",
+      "vendor.contract_amendment",
+      "audit_log.tamper_attempt",
+      "bcp.dr_failover_test"
+    ]
+  },
+  "incidents_for_demo": [
+    {
+      "id": "MB-INC-2025-001",
+      "title": "Business email compromise attempt against commercial loan customer (October 2025)",
+      "severity": "High",
+      "status": "Closed",
+      "summary": "Spoofed CFO email instructed commercial loan customer (regional construction firm) to redirect a $2.3M wire. Meridian call-back verification caught the request 38 minutes after wire release; recall initiated within 2 hours, $1.8M recovered via correspondent bank and Federal Reserve recall window.",
+      "lessons_learned": "Lowered high-value wire dollar threshold triggering mandatory call-back from $500K to $250K for first-time beneficiary changes. Required dual approval for any wire where beneficiary bank changed within 14 days. Quarterly BEC tabletop with top 50 commercial customers."
+    }
+  ],
+  "key_personnel": [
+    {
+      "role": "CEO",
+      "name_pattern": "persona"
+    },
+    {
+      "role": "President and COO",
+      "name_pattern": "persona"
+    },
+    {
+      "role": "CIO",
+      "name_pattern": "persona"
+    },
+    {
+      "role": "CISO",
+      "name_pattern": "persona"
+    },
+    {
+      "role": "Chief Risk Officer (CRO)",
+      "name_pattern": "persona"
+    },
+    {
+      "role": "BSA Officer",
+      "name_pattern": "persona"
+    },
+    {
+      "role": "Chief Compliance Officer",
+      "name_pattern": "persona"
+    },
+    {
+      "role": "Head of Third-Party Risk Management",
+      "name_pattern": "persona"
+    },
+    {
+      "role": "Head of Business Continuity",
+      "name_pattern": "persona"
+    }
+  ]
+}
