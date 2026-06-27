@@ -70,7 +70,7 @@ The decision tree below guides the customer notification decision:
 - Step 4: How many customers are affected? Aggregate count informs notification method and substitute notice triggers.
 - Step 2: Was the information encrypted or rendered unusable? If yes, notification may not be required for GLBA purposes.
 
-![Figure 1: Meridian Bank Operational Risk Register 5x5 - 12 Risks INHERENT vs RESIDUAL](assets/images/meridian-operational-risk-heatmap.png)
+![Figure 1: Meridian Bank Operational Risk Register 5x5 - 12 Risks INHERENT vs RESIDUAL](../../assets/images/meridian-operational-risk-heatmap.png)
 
 ## 5. State Notification Matrix (NC, SC, VA, TN)
 

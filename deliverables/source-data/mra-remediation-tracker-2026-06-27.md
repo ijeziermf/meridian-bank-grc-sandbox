@@ -37,7 +37,7 @@ Each MRA carries a target close date, an owner, a status (Open, In Remediation, 
 
 The 2025-Q3 IT examination cycle resulted in six MRAs. All six were closed during the 2026-Q1 remediation cycle. The closed MRAs are summarized below for examiner reference.
 
-![Figure 1: Meridian Bank MRA Remediation Timeline (6 Closed 2026-Q1, 3 Open Forward-Looking)](assets/images/meridian-mra-tracker-gantt.png)
+![Figure 1: Meridian Bank MRA Remediation Timeline - 4 Closed 2026-Q1, 3 Forward-Looking Items](../../assets/images/meridian-mra-tracker-gantt.png)
 
 ### 3.1 MRA-2025-Q3-01: Vendor Risk Management Documentation
 

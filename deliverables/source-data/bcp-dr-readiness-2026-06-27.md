@@ -49,7 +49,7 @@ Tier 2 systems reflect customer-facing impact within a banking day. Digital bank
 
 Tier 3 systems have no regulatory or settlement exposure and are recovered only after Tier 1 and Tier 2 restoration is confirmed stable.
 
-![Figure 1: Meridian Bank BCP/DR RTO by Tier (Tier 1 Critical <=4h, Tier 2 Essential 4-24h, Tier 3 Deferrable >24h)](assets/images/meridian-bcp-rto-rpo-timeline.png)
+![Figure 1: Meridian Bank BCP/DR RTO by Tier (Tier 1 Critical <=4h, Tier 2 Essential 4-24h, Tier 3 Deferrable >24h)](../../assets/images/meridian-bcp-rto-rpo-timeline.png)
 
 ## 4. Recovery Procedures
 

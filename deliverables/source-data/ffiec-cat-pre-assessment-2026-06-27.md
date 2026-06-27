@@ -107,7 +107,7 @@ The assessment was conducted through document review (12 policies, 30 vendor rec
 | 4. External Dependency Management | Evolving | Intermediate | Fourth-party visibility, vendor assessment coverage |
 | 5. Cyber Incident Management and Resilience | Intermediate | Advanced | Tabletop cadence, DR test frequency |
 
-![Figure 1: Meridian Bank FFIEC CAT Maturity Assessment - Current vs Target State](assets/images/meridian-ffiec-cat-maturity.png)
+![Figure 1: Meridian Bank FFIEC CAT Maturity Assessment - Current vs Target State](../../assets/images/meridian-ffiec-cat-maturity.png)
 
 ## 4. Recommendations
 

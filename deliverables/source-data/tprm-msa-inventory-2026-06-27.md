@@ -102,7 +102,7 @@ Four vendors (FIS, Fiserv, ACI, Jack Henry) account for an estimated 60 percent 
 
 Mitigation: long-term contracts with renewal visibility, contractual SLA enforcement, joint DR exercise participation, and a documented exit playbook for each critical vendor.
 
-![Figure 1: Meridian Bank Top 8 Critical Vendors by Annual Contract Value (60% spend concentration)](assets/images/meridian-vendor-concentration.png)
+![Figure 1: Meridian Bank Top 8 Critical Vendors by Annual Contract Value (60% spend concentration)](../../assets/images/meridian-vendor-concentration.png)
 
 ## 6. Vendor Exit Planning
 

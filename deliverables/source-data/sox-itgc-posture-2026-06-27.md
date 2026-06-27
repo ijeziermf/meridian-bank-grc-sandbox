@@ -91,7 +91,7 @@ The 2026 cycle focuses on three areas of heightened PCAOB focus: (a) ITGCs at th
 
 **Program development domain: 7/7 controls effective.**
 
-![Figure 1: Meridian Bank Multi-Framework Cross-Walk - 12 Controls x 3 Frameworks (FFIEC CAT + GLBA + SOX ITGC)](assets/images/meridian-multi-framework-cross-walk.png)
+![Figure 1: Meridian Bank Multi-Framework Cross-Walk - 12 Controls x 3 Frameworks (FFIEC CAT + GLBA + SOX ITGC)](../../assets/images/meridian-multi-framework-cross-walk.png)
 
 ## 3. PCAOB Heightened Focus Areas (2026 Cycle)
 

@@ -61,9 +61,9 @@ Per 16 CFR 314.4(c), the Information Security Program must include administrativ
 
 **Total controls assessed: 16 (14 original + 2 new from 2026 revision: incident response plan and due diligence are now explicit; board reporting and periodic assessment of service provider effectiveness were added)**
 
-**Status summary: 12 Met, 3 Partial, 0 Missing, 0 Not Applicable.**
+**Status summary: 12 Met, 3 Partial, 0 Missing, 0 Not Applicable.** (Chart shows 15 controls; the 16th control [Qualified Individual] is captured in the table above and the Personnel Security policy.)
 
-![Figure 1: Meridian Bank GLBA Safeguards Rule Coverage by Control (16 CFR Part 314)](assets/images/meridian-glba-coverage.png)
+![Figure 1: Meridian Bank GLBA Safeguards Rule Coverage by Control (16 CFR Part 314)](../../assets/images/meridian-glba-coverage.png)
 
 ## 4. Gap Remediation Plan
 

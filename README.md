@@ -1,285 +1,297 @@
-# Meridian Bank FFIEC + GLBA + SOX GRC Engagement
+# Meridian Bank FFIEC + GLBA + SOX GRC Engagement Design
 
-> FFIEC Cybersecurity Assessment Tool pre-assessment, Gramm-Leach-Bliley Act (GLBA) Safeguards program review, and Sarbanes-Oxley (SOX) IT General Controls posture for a publicly traded mid-size community bank. 8 stakeholder-ready PDFs plus a production-grade vulnerability management pipeline.
+> **FFIEC Cybersecurity Assessment Tool (CAT) pre-assessment, Gramm-Leach-Bliley Act (GLBA) Safeguards program review, and Sarbanes-Oxley (SOX) IT General Controls (ITGC) posture for a publicly traded mid-size community bank, complete with framework mapping, perimeter design, and GRC platform readiness.**
 
 ---
 
-## At a Glance
-
-| Dimension | Value |
-|---|---|
-| Persona | Meridian Bank, N.A. (NYSE: MRDN) |
-| Industry | Commercial Banking, mid-size regional community bank |
-| Total Assets | $50.2 billion |
-| Employees | 3,200 (12 FTE security, 28 FTE compliance, 180 FTE engineering) |
-| Customers | 2.4 million retail and commercial |
-| Branches | 240 across NC, SC, VA, TN |
-| Primary Federal Regulator | Office of the Comptroller of the Currency (OCC) |
-| Hosting | Hybrid: FIS-hosted core banking (Profile platform), on-prem data center Charlotte NC, Azure AD for identity, AWS for digital channels |
-| Frameworks in Scope | FFIEC CAT, FFIEC IT Examination Handbook, GLBA Safeguards Rule (16 CFR Part 314), SOX ITGC (PCAOB Section 404), PCI DSS 4.0 ROC, NYDFS 23 NYCRR 500 (adjacent) |
-| Last IT Exam | 2025-Q3, six MRAs all closed 2026-Q1 |
-| Deliverables | 8 stakeholder-ready PDFs + 1 production-grade vulnerability management pipeline + 7 evidence-quality visuals |
-| Audience | OCC examiners, FDIC, state banking regulators, PCAOB-registered SOX auditor, Board Risk Committee, CISO, CIO, CRO |
-| Industry Relevance | Mid-size regional banks ($10B to $100B in assets), publicly traded community banks, hybrid-hosting banking models, Bank Secrecy Act (BSA) programs |
-
 ## What This Demonstrates
 
-A banking ISSO/CISO who can:
+| Capability | Details |
+|---|---|
+| **Engagement Type** | FFIEC CAT pre-assessment + GLBA Safeguards program review + SOX ITGC posture assessment for a publicly traded community bank |
+| **Methodology** | Framework mapping across 8 regulatory frameworks, hybrid-hosting perimeter design, quantitative risk scoring |
+| **Deliverables** | Engagement scope, 4 perimeters, 8 frameworks mapped, 12 pre-identified risk scenarios, 12 FFIEC-aligned policies, 5 validation flows, 1 closed incident |
+| **Stakeholder Focus** | Office of the Comptroller of the Currency (OCC) examiners, Federal Deposit Insurance Corporation (FDIC), state banking regulators, PCAOB-registered SOX auditor, board audit committee |
+| **Industry Relevance** | Mid-size regional banks ($10B to $100B in assets), publicly traded community banks, hybrid-hosting banking models, Bank Secrecy Act (BSA) programs |
 
-1. Prepare examiner-facing artifacts (FFIEC CAT, GLBA Safeguards Rule gap assessment, SOX ITGC posture) for a publicly traded community bank with $50B in assets, prior MRA history, and active SOX audit cycle.
-2. Map controls across multiple overlapping frameworks (FFIEC CAT, GLBA, SOX, PCI DSS, NYDFS adjacent) and operate them efficiently as a single program rather than parallel compliance tracks.
-3. Run a 30-vendor Third Party Risk Management (TPRM) program including critical vendor concentration analysis (FIS, Fiserv, ACI, Jack Henry at 60% of vendor spend) and fourth-party (subprocessor) risk visibility.
-4. Operate a Business Continuity / Disaster Recovery (BCP/DR) program with tiered Recovery Time Objectives (RTO 1-72 hours) and Recovery Point Objectives (RPO 0-24 hours) calibrated to regulatory and settlement obligations.
-5. Build and operate a production-grade vulnerability management pipeline (Nessus + Qualys ingestion, CVE to FFIEC domain mapping, Jira ticket generation, critical-CVE escalation) that satisfies FFIEC IT Examination Handbook continuous vulnerability identification expectations.
-6. Communicate to the Board Risk Committee in writing and in person, with the discipline of quarterly cadence, top-5 risk prioritization, and the GLBA 314.4(e) annual written report requirement.
-7. Track MRA remediation lifecycle end-to-end (from 2025-Q3 exam to 2026-Q1 closure) with forward-looking items, status reporting cadence, and examiner communication protocol.
-8. Design a Breach Notification Playbook that navigates GLBA Interagency Guidance (30-day customer notification), state banking notification windows (NC, SC, VA, TN), NYDFS 23 NYCRR 500 72-hour (adjacent), and contractual notification obligations in MSAs.
+---
 
-## Deliverables
+## Overview
 
-### Stakeholder-Facing PDFs (8 files, IJEZIE RISK ADVISORY branded)
+Meridian Bank, N.A. is a 3,200-employee community bank holding company chartered in 1962 and headquartered in Charlotte, North Carolina. The holding company (Meridian Bancshares, Inc., NYSE: MRDN) trades publicly on the New York Stock Exchange since the 2018 initial public offering. With 240 branches across North Carolina, South Carolina, Virginia, and Tennessee, $50.2 billion in total assets, and 2.4 million retail and commercial customers, Meridian sits in the segment where FFIEC scrutiny is sharpest: too large to operate as a community bank, too small to absorb a major regulatory enforcement action.
+
+This engagement scoped the vCISO work needed to prepare Meridian for its 2026 OCC IT examination cycle, refresh the GLBA Safeguards program under the 2026 revisions, and complete the in-progress 2026 SOX ITGC audit. The framework landscape is dense and overlapping: FFIEC CAT as the primary regulator-driven assessment, FFIEC IT Examination Handbook as the day-to-day supervision lens, SOX ITGC for the PCAOB-registered auditor's annual cycle, GLBA Safeguards Rule for customer Nonpublic Personal Information (NPI), and PCI DSS 4.0 for the Fiserv-scope card services platform. The deliverable captured in this repository is the **engagement design** - the persona specification, perimeter scoping, framework mapping, risk register seed, policy set, validation flows, and incident analysis that a vCISO would produce in Phase 0 before a single record is loaded into the GRC platform.
+
+Mid-engagement, the team migrated the underlying platform from an open-source GRC tool to CISO Assistant Community Edition v3.18.3 to gain API coverage, framework library depth, and audit-log forwarding suitable for FFIEC IT Examination Handbook retention. That tooling decision is documented in the lab/ folder and is the kind of mid-engagement platform swap that real consulting work requires.
+
+This repository is **Phase 0 of the engagement**. Phase 1 - ingesting the persona spec into the live CISO Assistant instance, populating the 12 risk scenarios with inherent and residual scoring, building the 12-policy library with framework crosswalks, and standing up the audit-log forwarder to Datadog and Splunk Cloud - begins when the engagement starts.
+
+## Phase 2 Deliverables (this commit)
+
+### Stakeholder-Facing PDFs (8 files, v3 brand-compliant)
 
 | Deliverable | Purpose | Pages | Audience |
 |---|---|---|---|
-| [FFIEC CAT Maturity Pre-Assessment](deliverables/ffiec-cat-pre-assessment.pdf) | 5 domains x 5 maturity levels with current state (Intermittent) and target state (Intermediate). Inherent risk profile: High | 6 | OCC examiner, board Risk Committee, CISO |
-| [GLBA Safeguards Rule Gap Assessment](deliverables/glba-safeguards-gap.pdf) | 15 substantive controls against 16 CFR Part 314. 12 Met, 3 Partial, 0 Missing. Includes 2026 revision coverage | 5 | CISO, CTO, examiner |
-| [SOX ITGC Posture Review](deliverables/sox-itgc-posture.pdf) | 4 ITGC domains x 27 controls. No material weakness identified. PCAOB 2026 heightened focus areas covered | 7 | CFO, CIO, internal audit, PCAOB auditor |
-| [BCP/DR Readiness Package](deliverables/bcp-dr-readiness.pdf) | Business Impact Analysis (BIA) with 3 tier RTO/RPO, recovery procedures for FIS Profile / ACI / FedLine, regional event scenarios | 5 | COO, IT operations, examiner |
-| [Vendor Risk + MSA Inventory](deliverables/tprm-msa-inventory.pdf) | 30 vendors across 5 tiers. Critical vendor concentration (FIS + Fiserv + ACI + Jack Henry = 60% of vendor spend). Fourth-party risk coverage | 7 | Head of TPRM, procurement, examiner |
-| [MRA Remediation Tracker](deliverables/mra-remediation-tracker.pdf) | 6 MRAs from 2025-Q3 exam (closed 2026-Q1) + 3 forward-looking open items with board reporting cadence | 5 | CISO, board Risk Committee |
-| [Breach Notification Playbook](deliverables/breach-notification-playbook.pdf) | GLBA 30-day + state banking + NYDFS 72-hour (adjacent) + contractual notification. Worked example: MB-INC-2025-001 BEC ($2.3M wire, $1.8M recovered) | 6 | CISO, Legal, on-call team |
-| [Board + Risk Committee Briefing](deliverables/board-risk-committee-briefing.pdf) | Quarterly briefing with cyber risk appetite, top 5 risks (INHERENT/RESIDUAL), FFIEC CAT maturity status, MRA status, GLBA 314.4(e) board reporting, SOX opinion | 5 | Board, Risk Committee, CEO |
+| [FFIEC CAT Pre-Assessment](deliverables/ffiec-cat-pre-assessment.pdf) | 5-domain maturity pre-assessment for OCC IT exam | 6 | OCC examiner, CISO, CRO |
+| [GLBA Safeguards Gap](deliverables/glba-safeguards-gap.pdf) | 16 CFR Part 314 control status + remediation plan | 5 | Board, CISO, Compliance |
+| [SOX ITGC Posture Review](deliverables/sox-itgc-posture.pdf) | PCAOB Section 404 ITGC for 2026 cycle | 7 | PCAOB auditor, CISO, SOX steering |
+| [BCP/DR Readiness Package](deliverables/bcp-dr-readiness.pdf) | FFIEC IT Exam Handbook BCP/DR for FIS/ACI/FedLine | 5 | OCC examiner, Head of BCP, CIO |
+| [TPRM + MSA Inventory](deliverables/tprm-msa-inventory.pdf) | 30-vendor inventory + subprocessor risk | 7 | CISO, Head of TPRM, OCC examiner |
+| [MRA Remediation Tracker](deliverables/mra-remediation-tracker.pdf) | 4 closed MRAs + 3 forward-looking items | 5 | Board Risk Committee, OCC examiner |
+| [Breach Notification Playbook](deliverables/breach-notification-playbook.pdf) | GLBA + state + contractual notification playbook | 6 | CISO, GC, BSA Officer, OCC examiner |
+| [Board + Risk Committee Briefing](deliverables/board-risk-committee-briefing.pdf) | Quarterly board briefing per GLBA 314.4(e) | 5 | Board, Risk Committee, CEO |
 
-**Total: 47 pages of examiner-defensible banking documentation across 8 stakeholder-ready PDFs.**
+### Visual Evidence (7 PNGs, all IJEZIE RISK ADVISORY branded)
 
-### Operational Artifact (Production-Grade Code)
-
-[Vulnerability Management Pipeline](lab/ops/vuln-mgmt-pipeline/) at `lab/ops/vuln-mgmt-pipeline/`:
-- `meridian_vuln_pipeline.py` - main daemon (stateful processing, never-fail contract, crash recovery)
-- `parsers/` - Nessus XML parser + Qualys CSV parser
-- `mappings/` - CVE to FFIEC domain mapper (curated lookup + keyword heuristics)
-- `outputs/` - Jira ticket generator + email escalation template for critical CVEs (CVSS >= 9.0)
-- `state/` - crash-recovery state manager (NDJSON append-only, idempotent)
-- `com.meridian.vuln-pipeline.plist` - launchd daemon definition (auto-restart on crash)
-- `README.md` - installation, configuration, verification
-- `requirements.txt` - Python deps (PyYAML, defusedxml, requests, jinja2)
-
-This pipeline satisfies the FFIEC IT Examination Handbook Information Security booklet expectation of continuous vulnerability identification, classification, and remediation tracking. Same operational credibility pattern as Helix's audit log forwarder, applied to a different control expectation.
-
-### Evidence-Quality Visuals (7 PNGs in `assets/images/`)
-
-Generated for the v3 stakeholder-facing PDFs (no UI screenshots, no platform captures - these show the analyst's output, not the platform's UI):
-
-| Visual | What It Shows |
-|---|---|
-| `meridian-operational-risk-heatmap.png` | 5x5 OCC Operational Risk categories with 12 MB-R-01 through MB-R-12 risks plotted INHERENT vs RESIDUAL side-by-side |
-| `meridian-ffiec-cat-maturity.png` | 5 FFIEC CAT domains with Current (Intermittent) vs Target (Intermediate+) maturity bars |
-| `meridian-glba-coverage.png` | 15 GLBA Safeguards Rule controls stacked by Met/Partial/Missing status |
-| `meridian-multi-framework-cross-walk.png` | 12 Meridian controls x 3 frameworks (FFIEC CAT + GLBA 314.4 + SOX ITGC) |
-| `meridian-bcp-rto-rpo-timeline.png` | 10 critical systems x RTO/RPO by Tier 1 / Tier 2 / Tier 3 |
-| `meridian-vendor-concentration.png` | 30 vendors across 5 tiers + top 8 critical vendors by annual contract value (60% spend concentration) |
-| `meridian-mra-tracker-gantt.png` | 6 closed MRAs + 3 forward-looking open items on a 22-month timeline |
-
-All visuals:
-- Brand compliant (IJEZIE RISK ADVISORY footer, no emojis, no em-dashes)
-- LAB-SYNTHETIC tag on each
-- Verified by visual QA against specific criteria
-
-## Risk Register Summary
-
-| ID | Title | Inherent | Residual | Owner |
-|---|---|---|---|---|
-| MB-R-01 | ATM jackpotting at regional branch fleet | 16 | 9 | Head of Physical Security / CISO |
-| MB-R-02 | Wire fraud via business email compromise (BEC) targeting commercial customers | 25 | 12 | BSA Officer / CISO |
-| MB-R-03 | ACH fraud (origination debiting or returns manipulation) | 20 | 12 | BSA Officer |
-| MB-R-04 | Synthetic identity lending losses (auto loan and unsecured consumer) | 16 | 9 | Chief Credit Officer |
-| MB-R-05 | Correspondent banking AML/KYC gap (Pershing or downstream foreign bank) | 20 | 12 | BSA Officer |
-| MB-R-06 | Core banking vendor concentration on FIS Profile (single point of failure) | 16 | 16 | CIO |
-| MB-R-07 | Ransomware on FIS-hosted core banking host (managed environment, shared responsibility) | 20 | 12 | CISO |
-| MB-R-08 | Third-party core banking breach at FIS exposing customer NPI | 25 | 16 | CISO |
-| MB-R-09 | Destructive malware / wiper attack on internal branch network | 16 | 9 | CISO |
-| MB-R-10 | Insider trading via material non-public information (MNPI) accessed through trust operations | 12 | 6 | CCO / Head of Wealth |
-| MB-R-11 | Critical vendor SLA breach during quarter-end close (FIS Profile or ACI) | 12 | 9 | CIO |
-| MB-R-12 | Disaster recovery failure - inability to fail over from Charlotte primary data center during regional event | 16 | 9 | Head of Business Continuity |
-
-**Total risks: 12. Inherent sum: 196. Residual sum: 130. Net reduction: 66 (34%).**
-
-Note that MB-R-06 (FIS concentration) and MB-R-08 (third-party breach at FIS) residuals cannot be reduced below inherent through Meridian controls alone - these are addressed via vendor contractual protections, SLAs, and exit planning rather than internal control investment.
-
-## Vendor Risk Snapshot (30 Vendors)
-
-| Tier | Count | Examples |
+| Visual | Source data | Reference |
 |---|---|---|
-| Critical (OCC-supervised service provider) | 9 | FIS (Profile core banking), Jack Henry (SilverLake trust), Fiserv (card services), ACI Worldwide (wires), Pershing (correspondent) |
-| Critical (no BAA-equivalent) | 1 | Federal Reserve FedLine Advantage (governed by Operating Circular 5) |
-| High (Cloud/Infrastructure) | 11 | AWS, Azure AD, Datadog, Splunk Cloud |
-| Medium (Operational) | 7 | Vanta (internal efficiency), Workday, Coupa |
-| Low (Internal Tools) | 2 | Office productivity, HR |
+| [meridian-operational-risk-heatmap.png](assets/images/meridian-operational-risk-heatmap.png) | 12 risks x 5x5 OCC matrix INHERENT vs RESIDUAL | board-risk-committee-briefing, breach-notification-playbook |
+| [meridian-ffiec-cat-maturity.png](assets/images/meridian-ffiec-cat-maturity.png) | 5 domains x 5 maturity levels current vs target | ffiec-cat-pre-assessment |
+| [meridian-glba-coverage.png](assets/images/meridian-glba-coverage.png) | 16 CFR Part 314 control coverage | glba-safeguards-gap |
+| [meridian-multi-framework-cross-walk.png](assets/images/meridian-multi-framework-cross-walk.png) | 12 controls x 3 frameworks (FFIEC CAT + GLBA + SOX) | sox-itgc-posture |
+| [meridian-bcp-rto-rpo-timeline.png](assets/images/meridian-bcp-rto-rpo-timeline.png) | 10 systems by tier with RTO/RPO targets | bcp-dr-readiness |
+| [meridian-vendor-concentration.png](assets/images/meridian-vendor-concentration.png) | Top 8 critical vendors (60% spend concentration) | tprm-msa-inventory |
+| [meridian-mra-tracker-gantt.png](assets/images/meridian-mra-tracker-gantt.png) | MRA lifecycle timeline 4 closed + 3 open | mra-remediation-tracker |
 
-**Critical vendor concentration: 4 vendors (FIS, Fiserv, ACI, Jack Henry) = 60% of vendor spend.**
+### Operational Artifact: Vulnerability Management Pipeline
 
-## Banking-Specific Dimensions (Different from AtlasPay and Helix)
+Production-grade Python daemon at `lab/ops/vuln-mgmt-pipeline/` (10 files, ~1,200 LOC):
 
-### 1. Examiner-facing, not auditor-facing
+- Ingests Nessus XML and Qualys CSV scanner output
+- Maps CVEs to FFIEC IT Examination Handbook domains (audit / management / development / operations / infosec / bcp / outsourcing)
+- Generates Jira-formatted remediation tickets
+- Escalates critical findings (CVSS >= 9.0) via email
+- launchd daemon (auto-restart on crash)
+- NDJSON append-only state file for crash recovery
+- Never-fail contract: stage to /tmp, atomic rename, bounded retry, exit 0 unconditionally
 
-The deliverables are designed for OCC examiners, not PCAOB auditors. This is a fundamentally different communication style:
-- Auditors want sampling, evidence, control assertions
-- Examiners want maturity narratives, threat-informed risk assessments, comprehensive coverage
-- The FFIEC CAT maturity assessment (Current vs Target by domain) is the artifact examiners expect to see in the opening meeting of an IT exam
+This operational artifact satisfies FFIEC IT Examination Handbook Information Security booklet expectations for continuous vulnerability identification, classification, and remediation tracking - the same operational credibility as Helix's audit log forwarder, but for a different control domain.
 
-### 2. OCC Operational Risk Categories, not arbitrary risk buckets
+---
 
-The Risk Register uses the OCC Operational Risk taxonomy (Internal Fraud, External Fraud, Employment Practices, Clients/Business Practices, Business Disruption, Damage to Physical Assets, Execution/Delivery/Process Management) as the risk-scenario framework. This is what examiners look for, not generic risk categories.
+## Deliverables
 
-### 3. MRA lifecycle management
+| Artifact | Purpose | Audience |
+|---|---|---|
+| **Engagement Scope** | Frame the vCISO work against FFIEC + GLBA + SOX for a hybrid-hosting community bank | OCC examiners, board audit committee, CRO |
+| **Persona Specification** | Authoritative source of truth for org structure, perimeters, frameworks, risks, policies, vendors, ROPA, validation flows, incidents | Internal consulting team, GRC platform engineers |
+| **4 Perimeters** | FIS Profile core banking, Jack Henry trust operations, ACI wire processing, digital banking channels | CISO, CIO, vendor management |
+| **8 Frameworks Mapped** | FFIEC CAT, FFIEC IT Exam Handbook, NYDFS 23 NYCRR 500 (adjacent), SOX ITGC, GLBA Safeguards, FFIEC BCP/DR, PCI DSS 4.0, NIST CSF 2.0 | Compliance, audit, regulators |
+| **12 Risk Scenarios** | Pre-identified risk register covering wire fraud, ATM jackpotting, vendor concentration, ransomware, BCP failure | Board audit committee, CRO |
+| **12 FFIEC-Aligned Policies** | Information Security Program, GLBA Safeguards, Wire Transfer Authentication, BCP/DR, Incident Response, CIP, AML/BSA, OFAC, Records Retention, Training | Operations, compliance, auditors |
+| **5 Validation Flows** | Wire fraud response, OFAC match resolution, third-party breach notification, catastrophic BCP activation, GLBA exception | Risk owners, executives |
+| **30 Vendors (tiered)** | 9 critical, 11 high, 7 medium, 2 low; Federal Reserve as critical-no-BAA-equivalent | Vendor Management Officer, OCC examiners |
+| **15 ROPA Processing Activities** | GLBA Safeguards + state breach notification + CFPB Regulation P coverage | Privacy, legal, compliance |
+| **1 Closed Incident** | October 2025 BEC attempt against commercial loan customer, $1.8M recovered | Board, customers, regulators |
 
-MRAs (Matters Requiring Attention) are the OCC's primary supervisory tool. Tracking MRA closure, documenting remediation evidence, and reporting progress to the Board Risk Committee is a recurring cycle that banking ISSOs live with. The MRA Remediation Tracker is the artifact that demonstrates this discipline.
+---
 
-### 4. Correspondent banking and wire transfer risk
+## Key Features
 
-Wire fraud via BEC targeting commercial customers is the #1 loss event for community banks. The MB-INC-2025-001 worked example ($2.3M wire attempt, $1.8M recovered) demonstrates the playbook for high-value wire controls (call-back verification, beneficiary bank change controls, dual approval).
+- [x] **FFIEC CAT inherent risk profile = High, maturity profile = Intermittent across all five domains**, with full annual re-assessment and quarterly refresh
+- [x] **GLBA Safeguards Rule 2026 revision incorporated** into the program design and policy set
+- [x] **SOX ITGC scope identified** for FIS Profile core banking, ACI wire processing, and Fiserv card services (in-scope since IPO 2018, 2025 audit clean)
+- [x] **PCI DSS 4.0 Report on Compliance (ROC) issued 2025-Q4** for Fiserv-scope card services, Attestation of Compliance (AOC) current through 2026-Q4
+- [x] **Hybrid hosting model mapped** to four perimeters: FIS-hosted core, on-premises Charlotte data center, Azure Active Directory for identity, Amazon Web Services for digital channels
+- [x] **Correspondent banking exposure** addressed through Pershing and downstream foreign bank AML/KYC controls (NYDFS 23 NYCRR Part 500 tracked as adjacent framework despite no New York operations)
 
-### 5. FFIEC CAT vs SOX ITGC vs GLBA Safeguards Rule
+---
 
-Three overlapping frameworks that operate in genuinely different regulatory registers:
-- FFIEC CAT = voluntary maturity model used by examiners as reference
-- GLBA Safeguards Rule = mandatory under 16 CFR Part 314 (FTC) and interagency guidance (OCC/FDIC/Fed)
-- SOX ITGC = mandatory for public companies; PCAOB-audited annually
+## Engagement Scope: Perimeters
 
-The multi-framework cross-walk (12 controls x 3 frameworks) shows how single-control-multiple-framework satisfaction works.
-
-### 6. TPRM with fourth-party visibility
-
-Third Party Risk Management (TPRM) at a $50B bank includes not just direct vendor risk but fourth-party (subprocessor) risk: who does FIS sub-contract to? Who does ACI sub-contract to? Fourth-party visibility is the discipline that distinguishes a mature TPRM program from a checkbox one.
-
-### 7. Breach notification under GLBA + state + contract
-
-Unlike AtlasPay (72-hour GDPR + contract) or Helix (HIPAA 60-day + state overlays FL/NY/CA), the Meridian breach notification regime operates under:
-- GLBA Interagency Guidance on Response Programs (2005) - customer notification within 30 days if misuse is reasonably possible
-- State banking notification - varies by state (NC, SC, VA, TN)
-- NYDFS 23 NYCRR 500 - 72-hour notification (adjacent; Meridian is exempt because no NY operations but tracks it)
-- Contractual - vendor MSAs may have shorter windows
-
-The Breach Notification Playbook navigates all four regimes plus federal regulator coordination (the unwritten norm is to call the primary federal regulator within 24-48 hours of a significant incident).
-
-## Key Findings
-
-1. **MB-R-08 (third-party breach at FIS) is the highest residual risk** at score 16. Meridian cannot reduce this through internal controls - the mitigation is contractual protections in the FIS MSA, fourth-party visibility into FIS subprocessors, and exit planning for the 24-month replacement horizon if FIS is breached.
-
-2. **MB-R-06 (FIS vendor concentration) is structurally irreducible** at residual 16. There is no commercially viable alternative to FIS Profile in Meridian's timeframe. The mitigation is long-term contract renewal visibility, joint DR exercise participation, and the documented exit playbook.
-
-3. **FFIEC CAT maturity is Intermittent across all 5 domains**, target Intermediate. Closing the gap requires investment in independent assessment, threat hunting capability, continuous vulnerability management, branch network segmentation, fourth-party risk program, and tabletop cadence improvements. Estimated investment: $770K capex + $540K annually.
-
-4. **GLBA Safeguards Rule 2026 revision gaps are addressable** in 2026-Q3-Q4: SSDLC standards extension to vendor development, VPN MFA migration completion, endpoint DLP deployment, cloud DAP deployment, GLBA 314.4(e) annual written report to board.
-
-5. **SOX 2026 audit cycle is on track.** No material weakness identified. The heightened PCAOB focus areas (third-party ITGCs, privileged access, change management for digital banking) have mitigation workpapers in place.
-
-6. **MRA lifecycle discipline is mature.** The 6 MRAs from 2025-Q3 were all closed in the 2026-Q1 remediation cycle. The forward-looking tracker addresses continuous vulnerability management, branch network segmentation, and fourth-party risk visibility.
-
-7. **Breach Notification Playbook worked example: MB-INC-2025-001 BEC** demonstrated effective controls (38-minute detection via call-back verification, $1.8M recovered via correspondent bank and Federal Reserve recall window). Lessons learned drove procedural changes: lowered high-value wire dollar threshold from $500K to $250K for mandatory call-back, dual approval for beneficiary bank changes within 14 days, quarterly BEC tabletop with top 50 commercial customers.
-
-8. **Critical vendor concentration is the structural risk.** 4 vendors at 60% of vendor spend. The mitigation is not diversification (no commercially viable alternatives) but contractual protections, joint DR exercises, and exit playbooks.
-
-## What This Demonstrates for a vCISO Engagement
-
-This engagement demonstrates the vCISO discipline of working a regulator's framework backward from the examiner's perspective, not from the auditor's perspective. The FFIEC CAT is voluntary but examiners use it as the primary lens; producing this artifact before the examiner arrives (rather than after they ask) is the difference between a clean exam cycle and an MRA.
-
-The 8 deliverables + 1 operational artifact demonstrate:
-
-- **Examiner readiness** - FFIEC CAT pre-assessment, MRA remediation tracker, breach notification playbook
-- **Auditor readiness** - SOX ITGC posture, GLBA Safeguards gap assessment
-- **Board communication** - quarterly cadence, written reporting per GLBA 314.4(e), top-5 risk prioritization
-- **Operational credibility** - production-grade vulnerability management pipeline
-- **Cross-framework discipline** - single-control-multiple-framework mapping across 3 overlapping banking frameworks
-- **TPRM maturity** - 30 vendors, fourth-party visibility, critical concentration analysis
-
-## Process and Methodology
-
-This engagement used the following workflow:
-
-1. **Persona specification** - read `lab/source-data/meridian_persona_spec.json` for scope, risk count, vendor count, framework stack
-2. **Source markdown generation** - 8 deliverable source markdowns in `deliverables/source-data/` per the Ijezie Risk Advisory template
-3. **Evidence-quality visual generation** - 7 PNGs generated with matplotlib per the `grc-evidence-visual-pipeline` skill recipe, verified by visual QA
-4. **PDF generation with embedded visuals** - per the IJZ PDF template skill, dynamic cover/title metadata per doc type, dynamic page headers, embedded visuals via `![Figure N](../../assets/images/...)` syntax
-5. **Operational artifact coding** - vulnerability management pipeline in `lab/ops/vuln-mgmt-pipeline/` with production-grade code quality (type hints, docstrings, never-fail contract, crash recovery)
-6. **Brand compliance sweep** - 0 brand contamination, 0 em-dashes, 0 emojis across all deliverables
-7. **Voice rules** - past tense for completed work, no first person, expanded acronyms on first use
-8. **GitHub publish** - via Recipe 10 (fresh clone to `/tmp` to work around macOS APFS compressed-dataless clones)
-
-## Repository Structure
+The engagement is structured around four operational perimeters, each with distinct threat models, vendor dependencies, and regulatory anchors.
 
 ```
-meridian-bank-grc-sandbox/
-  README.md                                          (this file)
-  LICENSE
-  lab/
-    source-data/
-      meridian_persona_spec.json                     (engagement scope definition)
-    ops/
-      vuln-mgmt-pipeline/                           (production-grade operational artifact)
-        meridian_vuln_pipeline.py                   (main daemon)
-        parsers/nessus_xml.py                       (Tenable Nessus XML parser)
-        parsers/qualys_csv.py                       (Qualys VMDR CSV parser)
-        mappings/cve_to_ffeiec.py                   (CVE-to-FFIEC domain mapper)
-        mappings/ffeiec_domains.yaml                (curated mapping table)
-        outputs/jira_generator.py                   (Jira ticket generator)
-        outputs/email_escalator.py                  (critical CVE escalation template)
-        state/state_manager.py                      (NDJSON append-only state)
-        com.meridian.vuln-pipeline.plist            (launchd daemon)
-        config.ini                                  (configuration)
-        requirements.txt                            (Python deps)
-        README.md                                   (operational artifact README)
-  deliverables/
-    ffiec-cat-pre-assessment.pdf                    (FFIEC CAT)
-    glba-safeguards-gap.pdf                         (GLBA Safeguards Rule)
-    sox-itgc-posture.pdf                            (SOX ITGC)
-    bcp-dr-readiness.pdf                            (BCP/DR)
-    tprm-msa-inventory.pdf                          (TPRM)
-    mra-remediation-tracker.pdf                     (MRA Tracker)
-    breach-notification-playbook.pdf                (Breach Notification)
-    board-risk-committee-briefing.pdf               (Board Briefing)
-    source-data/
-      fffiec-cat-pre-assessment-2026-06-27.md
-      glba-safeguards-gap-2026-06-27.md
-      sox-itgc-posture-2026-06-27.md
-      bcp-dr-readiness-2026-06-27.md
-      tprm-msa-inventory-2026-06-27.md
-      mra-remediation-tracker-2026-06-27.md
-      breach-notification-playbook-2026-06-27.md
-      board-risk-committee-briefing-2026-06-27.md
-      assets/images/                               (visual sources for PDF embedding)
-  assets/
-    images/
-      meridian-operational-risk-heatmap.png
-      meridian-ffiec-cat-maturity.png
-      meridian-glba-coverage.png
-      meridian-multi-framework-cross-walk.png
-      meridian-bcp-rto-rpo-timeline.png
-      meridian-vendor-concentration.png
-      meridian-mra-tracker-gantt.png
+1. FIS Profile Core Banking System (Tier 1)
+   └─→ Hosted core banking, deposit accounts, loans, general ledger
+   └─→ FIS-supervised service provider, FFIEC IT Handbook Outsourcing Booklet
+   └─→ OCC primary exam scope, SOX ITGC in-scope
+
+2. Jack Henry SilverLake Wealth Management and Trust Operations (Tier 2)
+   └─→ Fiduciary accounts, wealth management customer records
+   └─→ Jack Henry-supervised service provider
+   └─→ FFIEC-supervised, trust examinations
+
+3. Wire Transfer and Correspondent Banking (Tier 1)
+   └─→ ACI Worldwide Posttrade/Wire, FedLine Advantage
+   └─→ Federal Reserve-supervised, no BAA-equivalent
+   └─→ SOX ITGC in-scope, BSA/AML transaction monitoring
+
+4. Digital Banking Channels (Tier 2)
+   └─→ Customer-facing web and mobile, Zelle P2P, online bill pay
+   └─→ Azure AD for identity, AWS for hosting
+   └─→ FFIEC-supervised, multifactor authentication requirements
 ```
 
-## Tools and Frameworks
+---
 
-- **FFIEC Cybersecurity Assessment Tool (CAT)** - primary federal cybersecurity framework
-- **FFIEC IT Examination Handbook** - reference handbook covering IT audit, BCP, development/acquisition, infosec, management, operations, outsourcing, retail payments, wholesale payments, supervision of technology service providers
-- **GLBA Safeguards Rule** - 16 CFR Part 314 (FTC) and interagency guidance (OCC/FDIC/Fed)
-- **SOX Section 404** - PCAOB-registered auditor annual cycle
-- **PCI DSS 4.0** - annual Report on Compliance (ROC) for Fiserv-scope card services
-- **NIST CSF 2.0** - reference framework
-- **CISO Assistant Community Edition v3.18.3** - GRC platform (engagement-level, not committed to this repo)
-- **matplotlib** - chart generation
-- **PyYAML + defusedxml + requests + jinja2** - vulnerability pipeline dependencies
+## Pre-Identified Risk Scenarios
+
+The Phase 0 risk register seeds twelve scenarios, scored on a 5x5 quantitative matrix with inherent and residual tracking. The seed identifies scenarios a vCISO would expect to scope on day one; Phase 1 ingestion expands each with control mapping, treatment plans, and residual scoring.
+
+| Risk ID | Category | Description | Inherent | Regulatory Anchor |
+|---|---|---|---|---|
+| **MB-R-01** | Physical Security | ATM jackpotting at regional branch fleet | 16 (High) | FFIEC IT Examination Handbook |
+| **MB-R-02** | Wire Fraud | Business email compromise (BEC) on commercial wire initiation | 25 (Very High) | FFIEC Wholesale Payments Booklet |
+| **MB-R-03** | Payments | ACH origination debiting or returns manipulation | 20 (High) | FFIEC Retail Payments Booklet |
+| **MB-R-04** | Credit | Synthetic identity lending losses (auto loan, unsecured consumer) | 16 (High) | FFIEC Lending Booklet |
+| **MB-R-05** | BSA/AML | Correspondent banking AML/KYC gap (Pershing or downstream foreign bank) | 20 (High) | FFIEC BSA/AML Examination Manual |
+| **MB-R-06** | Vendor Concentration | Single point of failure on FIS Profile core banking | 16 (High) | FFIEC IT Handbook Outsourcing Booklet |
+| **MB-R-07** | Ransomware | Ransomware on FIS-hosted core banking host (managed environment, shared responsibility) | 20 (High) | FFIEC CAT Cybersecurity Controls |
+| **MB-R-08** | Third-Party Breach | Third-party core banking breach at FIS exposing customer NPI | 25 (Very High) | GLBA Safeguards Rule, state breach notification |
+| **MB-R-09** | Destructive Malware | Wiper attack on internal branch network | 16 (High) | FFIEC CAT Cybersecurity Controls |
+| **MB-R-10** | Insider Trading | Material non-public information (MNPI) accessed through trust operations | 12 (Medium) | SEC, FFIEC fiduciary supervision |
+| **MB-R-11** | Vendor SLA | Critical vendor SLA breach during quarter-end close (FIS Profile or ACI) | 12 (Medium) | FFIEC IT Handbook Outsourcing Booklet |
+| **MB-R-12** | BCP/DR | Inability to fail over from Charlotte primary data center during regional event | 16 (High) | FFIEC BCP/DR Handbook |
+
+---
+
+## Business Impact Analysis (BIA) Targets
+
+The BIA establishes Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO) for each perimeter, aligned with the FFIEC BCP/DR Handbook and SOX ITGC requirements.
+
+| Tier | Perimeter | RTO | RPO | Notes |
+|---|---|---|---|---|
+| **Tier 1 Critical** | FIS Profile core banking | 4 hours | 15 minutes | OCC primary scope, customer-facing deposit and loan servicing |
+| **Tier 1 Critical** | Wire transfer processing (ACI) | 2 hours | Zero for in-flight wires | Regulator-mandated, FedLine dependency |
+| **Tier 1 Critical** | FedLine Advantage access | 1 hour | Zero | Federal Reserve-supervised |
+| **Tier 2 Essential** | Jack Henry trust operations | 24 hours | 4 hours | Fiduciary accounts, end-of-day processing |
+| **Tier 2 Essential** | Fiserv card services authorization | 4 hours | 15 minutes | Card authorization, dispute workflow |
+| **Tier 2 Essential** | Digital banking channels | 8 hours | 1 hour | Online and mobile banking, Zelle P2P |
+| **Tier 2 Essential** | ATM driving platform | 8 hours | 1 hour | Own fleet and surcharge-free network |
+| **Tier 3 Deferrable** | Marketing analytics, HR IT, wealth reporting, branch video | 72+ hours | 24 hours | Non-customer-facing or archival |
+
+---
+
+## Vendor Tiering (TPRM)
+
+The Third-Party Risk Management (TPRM) program tiers thirty vendors across the four perimeters. The sample below shows the critical-tier providers that drive the engagement's regulatory exposure.
+
+| Vendor | Tier | Service | Regulatory Dependency |
+|---|---|---|---|
+| **FIS (Fidelity National Information Services)** | Critical | Core banking platform (Profile), deposit and loan servicing | OCC-supervised service provider |
+| **Jack Henry & Associates** | Critical | Trust operations platform (SilverLake), fiduciary accounts | FFIEC-supervised service provider |
+| **Fiserv** | Critical | Card services issuer processor, debit/credit, ATM driving | PCI DSS 4.0 scope, annual ROC |
+| **ACI Worldwide** | Critical | Wire transfer processing (Posttrade), AML transaction monitoring | SOX ITGC in-scope, wire room controls |
+| **Federal Reserve FedLine Advantage** | Critical (no BAA equivalent) | Fedwire and FedACH access, primary federal settlement | Federal Reserve-supervised, Operating Circular 5 |
+| **Pershing** | High | Correspondent banking, downstream foreign bank services | FFIEC BSA/AML Examination Manual |
+| **Datadog** | High | SIEM for audit log forwarding (US region) | FFIEC IT Handbook retention requirements |
+| **Splunk Cloud** | High | Secondary SIEM archival for FFIEC retention | FFIEC IT Handbook retention requirements |
+| **Azure Active Directory** | High | Identity provider for digital banking | FFIEC-supervised, MFA requirements |
+| **Amazon Web Services** | High | Digital banking hosting | FFIEC-supervised, third-party hosting |
+
+Full vendor inventory targets thirty providers across critical, high, medium, and low tiers with corresponding due-diligence cadences.
+
+---
+
+## Sample Validation Flow: Wire Fraud Incident Response
+
+The five Phase 0 validation flows define approver workflows for the highest-risk operational events. The wire fraud response flow illustrates the pattern.
+
+| Field | Detail |
+|---|---|
+| **Flow Name** | Wire fraud incident response (BEC on commercial customer) |
+| **Trigger** | Suspected or confirmed wire fraud, including BEC, account takeover, or social engineering |
+| **SLA** | 4 hours from detection to containment decision |
+| **Approvers** | BSA Officer, CISO, Fraud Operations Director, General Counsel, CIO |
+| **Inputs** | Wire detail, customer call-back verification status, correspondent bank notification, Federal Reserve recall eligibility |
+| **Outputs** | Containment decision (recall initiated, loss accepted, customer notification), SAR filing determination, OCC notification if material |
+| **Linked Risk** | MB-R-02 (Wire fraud via BEC targeting commercial customers) |
+| **Linked Framework** | FFIEC Wholesale Payments Booklet, BSA/AML Examination Manual |
+
+The other four validation flows follow the same pattern with different approver chains: OFAC match resolution (24-hour SLA), third-party vendor breach notification (72-hour SLA), catastrophic BCP activation (2-hour SLA, includes external OCC notification), and GLBA Safeguards exception (48-hour SLA, includes Board Risk Committee and Internal Audit sign-off).
+
+---
+
+## Closed Incident: BEC on Commercial Loan Customer (October 2025)
+
+The persona includes one closed historical incident to support tabletop exercises and lessons-learned training.
+
+| Field | Detail |
+|---|---|
+| **Incident ID** | MB-INC-2025-001 |
+| **Date** | October 2025 |
+| **Type** | Business email compromise (BEC) targeting commercial loan customer |
+| **Severity** | High |
+| **Status** | Closed |
+| **Summary** | Spoofed CFO email instructed a regional construction firm (commercial loan customer) to redirect a $2.3M wire. Meridian call-back verification caught the request 38 minutes after wire release; recall initiated within 2 hours. $1.8M recovered via correspondent bank and Federal Reserve recall window. |
+| **Lessons Learned** | Lowered mandatory call-back threshold from $500K to $250K for first-time beneficiary changes. Required dual approval for any wire where beneficiary bank changed within 14 days. Quarterly BEC tabletop with top 50 commercial customers. |
+| **Linked Risk** | MB-R-02 (Wire fraud via BEC targeting commercial customers) |
+| **Tabletop Candidate** | Yes - included in the validation flows for FY 2026 |
+
+---
+
+## Why FFIEC + GLBA + SOX Matter for This Engagement
+
+A publicly traded mid-size community bank operates under a regulatory regime that is denser and more overlapping than what a FinTech or HealthTech faces. FFIEC is the dominant framework because OCC examiners assess against the FFIEC Cybersecurity Assessment Tool (CAT) and the FFIEC IT Examination Handbook booklets (Wholesale Payments, Retail Payments, Outsourcing, BSA/AML, BCP/DR). SOC 2 is not pursued - banking regulators prefer FFIEC, and pursuing both creates audit fatigue without regulatory value. SOX is mandatory because Meridian has been publicly traded since 2018; the PCAOB-registered auditor tests IT general controls annually across in-scope systems. GLBA Safeguards Rule governs customer NPI handling and was tightened in 2026; the program redesign was already underway when the engagement started.
+
+The hybrid hosting model adds another layer: FIS Profile is hosted core banking, but Charlotte NC houses an on-premises data center for internal systems, Azure Active Directory handles identity for digital banking, and Amazon Web Services hosts the customer-facing digital channels. Each perimeter has different threat models, different vendor dependencies, and different regulatory anchors. A vCISO engagement that maps this cleanly is the kind of work OCC examiners reward at exam time and that the board audit committee can use for governance decisions.
+
+---
+
+## Value to GRC Consulting
+
+| Service | Application |
+|---|---|
+| **FFIEC Pre-Assessment** | Demonstrates end-to-end FFIEC CAT + IT Examination Handbook scoping for a hybrid-hosting community bank |
+| **GLBA Program Review** | Shows how to operationalize the 2026 GLBA Safeguards Rule revision into policies, ROPA, and validation flows |
+| **SOX ITGC Posture Assessment** | Maps IT general controls scope across core banking, wire processing, and card services for a public company |
+| **Hybrid Hosting Risk** | Demonstrates perimeter design and risk scoring for banks with mixed FIS-hosted, on-premises, and cloud-hosted infrastructure |
+| **Third-Party Risk Management** | Shows tiering and due-diligence approach for thirty vendors across FFIEC-supervised, OCC-supervised, and Federal Reserve-supervised providers |
+| **Incident Response Design** | Captures the wire fraud BEC pattern (spoofed CFO, callback catch, recall recovery) as a tabletop exercise template |
+| **BIA / BCP/DR Design** | Tiered RTO/RPO targets aligned with FFIEC BCP/DR Handbook and SOX retention requirements |
+| **Audit Log Forwarding** | Targets the SIEM pattern (Datadog primary, Splunk Cloud secondary) for FFIEC IT Examination Handbook 7-year retention |
+
+---
+
+## Tools & Frameworks
+
+| Tool / Framework | Use |
+|---|---|
+| **CISO Assistant Community Edition v3.18.3** | GRC platform of record for framework library, risk register, policy library, validation flows |
+| **FFIEC Cybersecurity Assessment Tool (CAT)** | Primary regulator-driven assessment framework |
+| **FFIEC IT Examination Handbook** | Day-to-day supervision lens across all FFIEC booklets |
+| **SOX ITGC** | Annual PCAOB-registered auditor testing of in-scope IT general controls |
+| **GLBA Safeguards Rule (16 CFR Part 314)** | Customer NPI program design, 2026 revision incorporated |
+| **PCI DSS 4.0** | Fiserv-scope card services ROC and AOC |
+| **NYDFS 23 NYCRR 500** | Adjacent framework tracked despite no New York operations |
+| **NIST Cybersecurity Framework (CSF) 2.0** | Cross-reference taxonomy |
+| **Datadog (US region)** | Primary SIEM for audit log forwarding |
+| **Splunk Cloud** | Secondary archival for FFIEC 7-year retention |
+
+---
+
+## Key Takeaways
+
+1. **FFIEC dominates banking GRC work.** Pursuing SOC 2 alongside FFIEC creates audit fatigue without regulatory value. Banking regulators reward clean FFIEC CAT scoring and IT Examination Handbook alignment.
+
+2. **Hybrid hosting requires perimeter-by-perimeter design.** FIS Profile, Jack Henry SilverLake, ACI, Azure AD, and AWS each have different threat models, different vendor dependencies, and different regulatory anchors. A vCISO who maps this cleanly is the kind of resource OCC examiners trust.
+
+3. **Wire fraud response is a tabletop discipline, not a checklist.** The October 2025 BEC incident shows the value of mandatory call-back verification, dual approval for beneficiary bank changes, and quarterly tabletop exercises with the top commercial customers. The $1.8M recovery was policy-driven, not luck.
+
+4. **Public-company status adds SOX ITGC to the engagement.** FIS Profile, ACI wire processing, and Fiserv card services are all in-scope for the PCAOB-registered auditor's annual cycle. The framework mapping must distinguish between what OCC examiners care about and what the SOX auditor tests.
+
+---
 
 ## Related Projects
 
-- [AtlasPay](https://github.com/ijeziermf/atlaspay-grc-sandbox) - SOC 2 Type 1 Readiness for a FinTech (Y Combinator W23 portfolio company)
-- [Helix Health](https://github.com/ijeziermf/helix-health-grc-sandbox) - HIPAA + SOC 2 + HITRUST + HDS readiness for a HealthTech
+| Repo | Purpose |
+|---|---|
+| [AtlasPay FinTech SOC 2 Risk Assessment](https://github.com/ijeziermf/AtlasPay-Risk-Assessment) | Companion SOC 2 readiness engagement for a FinTech payment processor |
+| [AtlasPay Business Continuity Plan & Risk Profile](https://github.com/ijeziermf/AtlasPay-Risk-Profile-BCP) | Companion BCP and risk profile for the same FinTech persona |
+| [helix-health-grc-sandbox](https://github.com/ijeziermf/helix-health-grc-sandbox) | HIPAA + SOC 2 readiness for a HealthTech SaaS provider |
+| [ciso-assistant-community](https://github.com/intuitem/ciso-assistant-community) | The open-source GRC platform of record (v3.18.3) |
 
-Together, these three projects demonstrate breadth across FinTech (SOC 2), HealthTech (HIPAA), and Banking (FFIEC + GLBA + SOX), with operational credibility demonstrated by both Helix's audit log forwarder and Meridian's vulnerability management pipeline.
+---
+
+## Phase 0 vs Phase 1
+
+This repository is **Phase 0**: the engagement design. The persona specification, framework mapping, perimeter scoping, risk register seed, policy set, validation flows, and incident analysis are the work product. They are sufficient to start a Phase 1 engagement.
+
+**Phase 1** ingests this specification into a live CISO Assistant Community Edition instance: 12 risk scenarios with inherent and residual scoring, 12 policies with framework crosswalks, 30 vendors with tier-appropriate due-diligence cadences, 15 ROPA processing activities, 5 validation flows with approver chains, and the audit-log forwarder from CISO Assistant to Datadog and Splunk Cloud. The lab/ folder in this repository contains the schema, scripts, and operational notes that an engineer would use to execute Phase 1.
+
+---
 
 ## License
 
-MIT - Ijezie Risk Advisory portfolio artifact.
-
-All artifacts in this repository are LAB-SYNTHETIC. No real bank data. No real customer data. No real vendor data. The persona (Meridian Bank, N.A.) is fictional; the framework citations and control mappings are real.
+Educational and portfolio use. The Meridian Bank persona is a simulated engagement, not a real client. The work product is structured to demonstrate vCISO / Risk Manager competencies for hiring-manager evaluation.

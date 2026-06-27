@@ -33,7 +33,7 @@ The appetite is operationalized through: control standards in the Information Se
 
 ## 3. Top 5 Risks (Inherent and Residual)
 
-![Figure 1: Meridian Bank Top 5 Risks (INHERENT vs RESIDUAL scores)](assets/images/meridian-operational-risk-heatmap.png)
+![Figure 1: Meridian Bank Top 5 Risks (INHERENT vs RESIDUAL scores)](../../assets/images/meridian-operational-risk-heatmap.png)
 
 ### 3.1 MB-R-02: Wire Fraud BEC Targeting Commercial Customers
 
