@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.meridian.vuln-pipeline</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/local/bin/python3</string>
+        <string>/opt/meridian/ops/vuln-mgmt-pipeline/meridian_vuln_pipeline.py</string>
+        <string>--config</string>
+        <string>/opt/meridian/ops/vuln-mgmt-pipeline/config.ini</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <dict>
+        <key>SuccessfulExit</key>
+        <false/>
+        <key>Crashed</key>
+        <true/>
+    </dict>
+    <key>ThrottleInterval</key>
+    <integer>60</integer>
+    <key>StandardOutPath</key>
+    <string>/var/log/meridian-vuln-pipeline-stdout.log</string>
+    <key>StandardErrorPath</key>
+    <string>/var/log/meridian-vuln-pipeline-stderr.log</string>
+    <key>WorkingDirectory</key>
+    <string>/opt/meridian/ops/vuln-mgmt-pipeline</string>
+</dict>
+</plist>
